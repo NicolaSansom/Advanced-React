@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { Fragment } from "react";
+import React, { Fragment } from 'react';
+import Link from 'next/link';
 
-const Sell = props => (
+const Sell = () => (
   <Fragment>
     <p>Sell</p>
     <Link href="/">

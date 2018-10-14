@@ -1,14 +1,13 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
-const Home = props => (
+const Home = () => (
   <Fragment>
-    <p>
-      Home
-    </p>
-    <Link href="/sell"><a>Sell</a></Link>
+    <p>Home</p>
+    <Link href="/sell">
+      <a>Sell</a>
+    </Link>
   </Fragment>
 );
 
 export default Home;
-
