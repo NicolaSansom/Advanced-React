@@ -3,3 +3,16 @@ type User {
   name: String!
   email: String!
 }
+
+type Item {
+  id: ID! @unique
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  # createdAt: DateTime!
+  # updatedAt: DateTime!
+  # In the future we will a user type which wil be a relation
+  # user: User!
+}
