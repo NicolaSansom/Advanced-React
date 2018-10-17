@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import CreateItem from '../components/CreateItem';
 
 const Sell = () => (
-  <Fragment>
-    <p>Sell</p>
-  </Fragment>
+  <div>
+    <CreateItem />
+  </div>
 );
 
 export default Sell;
