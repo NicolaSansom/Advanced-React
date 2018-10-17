@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import Items from '../components/Items';
 
 const Home = () => (
-  <Fragment>
-    <p>Home</p>
-  </Fragment>
+  <div>
+    <Items />
+  </div>
 );
 
 export default Home;
