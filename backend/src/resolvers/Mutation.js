@@ -7,12 +7,12 @@ const mutations = {
   },
   updateItem(parent, args, ctx, info) {
     // first take a copy of the update
-    const update = { ...args };
+    const updates = { ...args };
     // remove id
     delete updates.id;
     // run the update method
     return ctx.db.mutation.updateItem({
-      data: { ...update },
+      data: { ...updates },
       where: { id: args.id },
     }, info);
   },
