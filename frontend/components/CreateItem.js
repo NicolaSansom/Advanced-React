@@ -42,7 +42,6 @@ class CreateItem extends Component {
 
     const res = await fetch('https://api.cloudinary.com/v1_1/dwsfmmg8c/image/upload', { method: 'POST', body: data });
     const file = await res.json();
-    console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
