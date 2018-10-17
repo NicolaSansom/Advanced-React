@@ -21,6 +21,7 @@
   "rules": {
     "no-unused-expressions": 0,
     "jsx-a11y/html-has-lang": 0,
+    "react/no-unused-state": 0,
     "no-debugger": 0,
     "no-unused-vars": [
       1,
