@@ -20,6 +20,7 @@
   },
   "rules": {
     "no-unused-expressions": 0,
+    "no-restricted-globals": 0,
     "react/button-has-type": 0,
     "jsx-a11y/html-has-lang": 0,
     "react/no-unused-state": 0,
