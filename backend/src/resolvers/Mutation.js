@@ -11,10 +11,13 @@ const mutations = {
     // remove id
     delete updates.id;
     // run the update method
-    return ctx.db.mutation.updateItem({
-      data: { ...updates },
-      where: { id: args.id },
-    }, info);
+    return ctx.db.mutation.updateItem(
+      {
+        data: { ...updates },
+        where: { id: args.id },
+      },
+      info
+    );
   },
 };
 

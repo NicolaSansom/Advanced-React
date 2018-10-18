@@ -12,12 +12,12 @@ function createServer() {
     // for the server to run it requires a mutation & query within the schema file!
     resolvers: {
       Mutation,
-      Query
+      Query,
     },
     resolverValidationOptions: {
-      requireResolversForResolveType: false
+      requireResolversForResolveType: false,
     },
-    context: req => ({...req, db}),
+    context: req => ({ ...req, db }),
   });
 }
 
