@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 // The resolvers actually reach out to the prisma database and get, add, change or delete things
 const mutations = {
   async createItem(parent, args, ctx, info) {
@@ -32,6 +35,29 @@ const mutations = {
       },
       info
     );
+  },
+
+  async signup(parent, args, ctx, info) {
+    args.email = args.email.toLowerCase();
+    // hash there password
+    const password = await bcrypt.hash(args.password, 10);
+    // create user in the database
+    const user = await ctx.db.mutation.createUser(
+      {
+        data: { ...args, password, permissions: { set: ['USER'] } },
+      },
+      info
+    );
+    // create jwt token for them after creating an account
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // We set the jwt as a cookie on the response
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+    });
+
+    // Finally return user to the browser
+    return user;
   },
 };
 
