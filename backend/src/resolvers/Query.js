@@ -6,6 +6,7 @@ const Query = {
   //   return items;
   // }
   items: forwardTo('db'),
+  itemsConnection: forwardTo('db'),
   item: forwardTo('db'),
 };
 
