@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
+const { transport, makeANiceEmail } = require('../mail');
 
 // The resolvers actually reach out to the prisma database and get, add, change or delete things
 const mutations = {
@@ -62,7 +63,7 @@ const mutations = {
     return user;
   },
 
-  async signin(parent, { email, password }, ctx, info) {
+  async signin(parent, { email, password }, ctx) {
     // 1. Check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
     if (!user) {
@@ -90,7 +91,7 @@ const mutations = {
     return { message: 'Goodbye' };
   },
 
-  async requestReset(parent, args, ctx, info) {
+  async requestReset(parent, args, ctx) {
     // 1. Check if this is a real user
     const user = await ctx.db.query.user({ where: { email: args.email } });
     if (!user) {
@@ -103,11 +104,23 @@ const mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry },
     });
-    return { message: 'Thanks!' };
     // 3. Email them that reset token
+    const mailRes = await transport.sendMail({
+      from: 'nicolasansom1994@gmail.com',
+      to: user.email,
+      subjectLine: 'Your password reset token',
+      html: makeANiceEmail(
+        `Your password Reset Token is here! \n\n <a href="${
+          process.env.FRONTEND_URL
+        }/reset?resetToken=${resetToken}">Click here to reset password</a>`
+      ),
+    });
+
+    // 4. Return a message
+    return { message: 'Thanks!' };
   },
 
-  async resetPassword(parent, args, ctx, info) {
+  async resetPassword(parent, args, ctx) {
     // 1, Check if the passwords match
     if (args.password !== args.confirmPassword) {
       throw new Error("Yo passwords don't match!");
