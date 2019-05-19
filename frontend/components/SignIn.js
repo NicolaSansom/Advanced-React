@@ -5,9 +5,9 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
-    signup(email: $email, name: $name, password: $password) {
+const SIGNIN_MUTATION = gql`
+  mutation SIGNUP_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
       id
       email
       name
@@ -15,7 +15,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-class Join extends Component {
+class SignIn extends Component {
   state = {
     name: '',
     email: '',
@@ -28,7 +28,7 @@ class Join extends Component {
 
   render() {
     return (
-      <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNUP_MUTATION} variables={this.state}>
+      <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={this.state}>
         {(signup, { error, loading }) => (
           <Form
             method="post"
@@ -39,7 +39,7 @@ class Join extends Component {
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign up for an account</h2>
+              <h2>Sign into your account</h2>
               <Error error={error} />
               <label htmlFor="email">
                 Email
@@ -51,10 +51,6 @@ class Join extends Component {
                   onChange={this.saveToState}
                 />
               </label>
-              <label htmlFor="name">
-                Name
-                <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.saveToState} />
-              </label>
               <label htmlFor="password">
                 Password
                 <input
@@ -65,7 +61,7 @@ class Join extends Component {
                   onChange={this.saveToState}
                 />
               </label>
-              <button type="submit">Join</button>
+              <button type="submit">Sign in</button>
             </fieldset>
           </Form>
         )}
@@ -74,4 +70,4 @@ class Join extends Component {
   }
 }
 
-export default Join;
+export default SignIn;
