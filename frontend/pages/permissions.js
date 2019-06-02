@@ -6,7 +6,6 @@ const PermissionsPage = () => (
   <div>
     <PleaseSignIn>
       <Permissions />
-      <p>Permissions!</p>
     </PleaseSignIn>
   </div>
 );
