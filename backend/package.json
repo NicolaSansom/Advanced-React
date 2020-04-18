@@ -8,6 +8,10 @@
     "test": "jest",
     "deploy": "prisma deploy --env-file variables.env --force"
   },
+  "@comment script": [
+    "Do not run yarn deploy it does not work just run prisma deploy --env-file variables.env --force directly within right within theå terminal",
+    "https://app.prisma.io/nicola-sansom-3eda0f/services/prisma-eu1/sickfits/dev/databrowser to admin"
+  ],
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "bcryptjs": "2.4.3",

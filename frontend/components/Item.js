@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import Title from './styles/Title';
 import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
-import DeleteItem from './DeleteItem';
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
+import AddToCart from './AddToCart';
 
 export default class Item extends Component {
   static propTypes = {
@@ -33,7 +34,7 @@ export default class Item extends Component {
           <Link href={{ pathname: 'update', query: { id: item.id } }}>
             <a>Edit ✏️</a>
           </Link>
-          <button>Add To Cart</button>
+          <AddToCart id={item.id} />
           <DeleteItem id={item.id}>Delete</DeleteItem>
         </div>
       </ItemStyles>
